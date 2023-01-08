@@ -1,12 +1,18 @@
 from Bio.Blast import NCBIWWW, NCBIXML
 
-query = str(input("Enter Sequence: "))
+# Access a file in fasta format by open("example.fasta").read() 
+query = ''
+
+# Access database in a similar way
 database = ''
 
-result_handle = NCBIWWW.qblast('blastp', database, query)
+# Accesses online BLAST
+result_handle = NCBIWWW.qblast('blastp', database, query) 
 
+#Parses the result_handle in XML Format and generates individual blast result.
 blast_results = NCBIXML.parse(result_handle)
 
+# Iterates through each result and gives the required values for each
 for record in blast_results:
     for alignment in record.alignments:
         for hsp in alignment.hsps:
